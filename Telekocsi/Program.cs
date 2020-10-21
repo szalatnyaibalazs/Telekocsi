@@ -106,6 +106,30 @@ namespace Telekocsi
                 }
             }
         }
+        static void HatodikFeladat()
+        {
+            StreamWriter file = new StreamWriter("utasuzenetek.txt");
+            foreach (var i in igenyek)
+            {
+                int x = 0;
+                while (x < autok.Count &&
+                    !(i.Indulas == autok[x].Indulas &&
+                    i.Cel == autok[x].Cel && i.Szemelyek <= autok[x].Ferohely))
+                {
+                    x++;
+                }
+                if (x < autok.Count)
+                {
+                    file.WriteLine($"{i.Azonosito}: Rendszám: {autok[x].Rendszam}, Telefonszám: {autok[x].Telefonszam}");
+                }
+                else
+                {
+                    file.WriteLine($"{i.Azonosito}: Sajnos nem sikerült autót találni");
+                }
+            }
+
+            file.Close();
+        }
         static void Main(string[] args)
         {
             beolvas();
@@ -113,7 +137,7 @@ namespace Telekocsi
 
             NegyedikFeladat();
             OtodikFeladat();
-
+            HatodikFeladat();
 
             Console.ReadKey();
         }
