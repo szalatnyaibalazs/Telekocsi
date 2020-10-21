@@ -11,10 +11,10 @@ namespace Telekocsi
     {
         //Azonosító;Indulás;Cél;Személyek
 
-        private string Azonosito { get; set; }
-        private string Indulas { get; set; }
-        private string Cel { get; set; }
-        private int Szemelyek { get; set; }
+        public string Azonosito { get; set; }
+        public string Indulas { get; set; }
+        public string Cel { get; set; }
+        public int Szemelyek { get; set; }
 
         public Igeny(string azonosito,string indulas,string cel,int szemely)
         {

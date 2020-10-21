@@ -10,7 +10,7 @@ namespace Telekocsi
     class Program
     {
         static List<Auto> autok = new List<Auto>();
-        static List<Igeny> igeny = new List<Igeny>();
+        static List<Igeny> igenyek = new List<Igeny>();
         static void beolvas()
         {
             StreamReader ol = new StreamReader("autok.csv");
@@ -28,7 +28,7 @@ namespace Telekocsi
             while (!lo.EndOfStream)
             {
                 string[] adat = lo.ReadLine().Split(';');
-                igeny.Add(new Igeny(adat[0], adat[1], adat[2], int.Parse(adat[3])));
+                igenyek.Add(new Igeny(adat[0], adat[1], adat[2], int.Parse(adat[3])));
             }
             lo.Close();
 
@@ -90,7 +90,21 @@ namespace Telekocsi
         }
         static void OtodikFeladat()
         {
-
+            Console.WriteLine("5.feladat");
+            foreach (var i in igenyek)
+            {
+                int x = 0;
+                while (x < autok.Count && 
+                    !(i.Indulas == autok[x].Indulas && 
+                    i.Cel == autok[x].Cel && i.Szemelyek <= autok[x].Ferohely))
+                {
+                    x++;
+                }
+                if (x<autok.Count)
+                {
+                    Console.WriteLine($"{i.Azonosito} => {autok[x].Rendszam}");
+                }
+            }
         }
         static void Main(string[] args)
         {
@@ -98,6 +112,8 @@ namespace Telekocsi
             MasodikFeladat();
 
             NegyedikFeladat();
+            OtodikFeladat();
+
 
             Console.ReadKey();
         }
